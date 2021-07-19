@@ -1,0 +1,30 @@
+rule Darkside_linux
+
+{
+
+  meta:
+
+        description = "darkside ransomware linux version"
+
+        author = "Alienvault Labs"
+
+        copyright = "Alienvault Inc. 2021"
+        
+        reference = "https://cybersecurity.att.com/blogs/labs-research/darkside-raas-in-linux-version"
+
+  strings:
+
+        $s1 = "[END] Remove Self"
+
+        $s2 = "[CFG] Landing URL#["
+
+        $s3 = "Welcome to DarkSide"
+
+        $dec_loop = {0F B6 02 84 C0 74 1C 0F B6 B1 DF A7 89 00 40 38 F0 74 10 48 83 C1 01 31 F0 48 83 F9 20 88 02 49 0F 44 C8}
+
+
+   condition:
+
+        uint32(0) == 0x464C457F and all of them
+
+}
